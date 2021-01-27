@@ -90,7 +90,7 @@ function loadImages(sources, callback) {
     }
 };
 
-function defineBoard() {
+function defineBoard(sqr_size) {
     // y,x
     var board = {"8" : [ {"a": [sqr_size * 0, sqr_size * 0]}, {"b": [sqr_size * 0, sqr_size * 1]}, {"c": [sqr_size * 0, sqr_size * 2]}, {"d": [sqr_size * 0, sqr_size * 3]}, {"e": [sqr_size * 0, sqr_size * 4]}, {"f": [sqr_size * 0, sqr_size * 5]}, {"g": [sqr_size * 0, sqr_size * 6]}, {"h": [sqr_size * 0, sqr_size * 7]} ],
         "7" : [ {"a": [sqr_size * 1, sqr_size * 0]}, {"b": [sqr_size * 1, sqr_size * 1]}, {"c": [sqr_size * 1, sqr_size * 2]}, {"d": [sqr_size * 1, sqr_size * 3]}, {"e": [sqr_size * 1, sqr_size * 4]}, {"f": [sqr_size * 1, sqr_size * 5]}, {"g": [sqr_size * 1, sqr_size * 6]}, {"h": [sqr_size * 1, sqr_size * 7]} ],
@@ -102,8 +102,7 @@ function defineBoard() {
         "1" : [ {"a": [sqr_size * 7, sqr_size * 0]}, {"b": [sqr_size * 7, sqr_size * 1]}, {"c": [sqr_size * 7, sqr_size * 2]}, {"d": [sqr_size * 7, sqr_size * 3]}, {"e": [sqr_size * 7, sqr_size * 4]}, {"f": [sqr_size * 7, sqr_size * 5]}, {"g": [sqr_size * 7, sqr_size * 6]}, {"h": [sqr_size * 7, sqr_size * 7]} ],
     };
 
-    return board
-
+    return board;
 }
 
 function game() {
@@ -112,8 +111,7 @@ function game() {
     ctx = setupCanvas(canvas);
     canvas.width = canvas.height;
     var sqr_size = canvas.width / 8;
-
-    var board = defineBoard();
+    var chessBoard = defineBoard(sqr_size);
 
     class ChessPiece {
 
@@ -168,10 +166,6 @@ function game() {
     const blackPawn8   = new ChessPiece("Pieces/ChessBlackPawn.svg",   "h7", "1", ["up", "diagonal"]);
 
 
-    var allPieces = [whiteKing, whiteQueen, whiteRook1, whiteRook2, whiteBishop1, whiteBishop2, whiteKnight1, whiteKnight2, whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8,
-                     blackKing, blackQueen, blackRook1, blackRook2, blackBishop1, blackBishop2, blackKnight1, blackKnight2, blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8,
-        ];
-
     var allPiecesImgs = [whiteKing.img.src, whiteQueen.img.src, whiteRook1.img.src, whiteRook2.img.src, whiteBishop1.img.src, whiteBishop2.img.src, whiteKnight1.img.src, whiteKnight2.img.src, whitePawn1.img.src, whitePawn2.img.src, whitePawn3.img.src, whitePawn4.img.src, whitePawn5.img.src, whitePawn6.img.src, whitePawn7.img.src, whitePawn8.img.src,
                      blackKing.img.src, blackQueen.img.src, blackRook1.img.src, blackRook2.img.src, blackBishop1.img.src, blackBishop2.img.src, blackKnight1.img.src, blackKnight2.img.src, blackPawn1.img.src, blackPawn2.img.src, blackPawn3.img.src, blackPawn4.img.src, blackPawn5.img.src, blackPawn6.img.src, blackPawn7.img.src, blackPawn8.img.src,
         ];
@@ -179,7 +173,7 @@ function game() {
     drawBoard(ctx, sqr_size, "#5D5D5D", "#EEEEEE");
 
     loadImages(allPiecesImgs, function(images) {
-        drawPieces(ctx, board, sqr_size, [whiteKing, whiteQueen, whiteRook1, whiteRook2, whiteBishop1, whiteBishop2, whiteKnight1, whiteKnight2, whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8,
+        drawPieces(ctx, chessBoard, sqr_size, [whiteKing, whiteQueen, whiteRook1, whiteRook2, whiteBishop1, whiteBishop2, whiteKnight1, whiteKnight2, whitePawn1, whitePawn2, whitePawn3, whitePawn4, whitePawn5, whitePawn6, whitePawn7, whitePawn8,
                          blackKing, blackQueen, blackRook1, blackRook2, blackBishop1, blackBishop2, blackKnight1, blackKnight2, blackPawn1, blackPawn2, blackPawn3, blackPawn4, blackPawn5, blackPawn6, blackPawn7, blackPawn8,
         ])
     });
