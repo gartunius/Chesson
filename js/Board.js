@@ -6,19 +6,14 @@
 
 function getCoords(piecePosition, board) {
 
-    const convert_file_to_index = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F", 6:"G", 7:"H"};
+    const convert_index_to_file = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7};
 
-    for (var rowNumber = 0; rowNumber < 8; rowNumber ++ ) {
-        for (var fileNumber = 0; fileNumber < 8; fileNumber ++) {
-            row = (Number.parseInt(rowNumber) + 1).toString();
-            file = convert_file_to_index[fileNumber].toLowerCase();
+    var rowNumber = (Number.parseInt(piecePosition[1]) - 1);
+    var row = piecePosition[1];
+    var fileNumber = convert_index_to_file[piecePosition[0]];
+    var file = piecePosition[0];
 
-            if (piecePosition[0] == file && piecePosition[1] == row) {
-                var rowNumStr = rowNumber.toString();
+    return board[rowNumber][row][fileNumber][file];
 
-                return board[rowNumber][rowNumStr][fileNumber][convert_file_to_index[fileNumber]];
-            }
-        }
-    }
 }
 

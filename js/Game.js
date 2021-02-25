@@ -31,7 +31,7 @@ canvas.addEventListener('click', (event) => {
         end_y = crnt_compare[1][1];
 
         if (x > start_x  && x < end_x && y > start_y && y < end_y) {
-            piece.showAvailableMoves(board);
+            piece.showAvailableMoves(chessBoard);
         }
 
     }

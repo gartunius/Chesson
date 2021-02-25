@@ -46,6 +46,7 @@ class ChessPiece {
                 }
 
                 var position = this.currentPosition[0] + (Number.parseInt(this.currentPosition[1]) + mod).toString();
+                console.log(position);
                 console.log(getCoords(position, board));
             }
         }

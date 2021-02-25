@@ -41,30 +41,36 @@ function drawBoard (context, sqr_size, dark_sqr_color, light_sqr_color, ctx_widt
     context.clearRect(0, 0, ctx_width, ctx_height);
 
     var board = [];
+    var files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    var rows = ['1', '2', '3', '4', '5', '6', '7', '8'];
+
     var crnt_color = light_sqr_color;
+    // Both 'file_index' and 'row_index' are integers that have the exact values to make the 
+    // multiplication necessary to get the start of x and y coordenates
+    for (row_index in rows) {
+        var row = rows[row_index];
+        board.push({[row]: []});
 
-    //rows; numbers
-    for (var y = 0; y < 8; y++) {
-        board.push({[y] : []});
-
-        if (y % 2 == 0) {
+        if (row_index % 2 == 0) {
             var crnt_color = light_sqr_color;
-        } else if (y % 2 != 0) {
+        } else if (row_index % 2 != 0) {
             var crnt_color = dark_sqr_color;
         }
 
-        // files; letters
-        for (var x = 0; x < 8; x++) {
-            x_position = sqr_size * x;
-            y_position = sqr_size * y;
-            //list
-            row = board[y][y];
+        for (file_index in files) {
+            var file = files[file_index];
 
+            var x = sqr_size * file_index;
+            var y = sqr_size * row_index;
+
+            var row_list = board[row_index][row];
+            var file_value = {[file]: [x, y]};
+
+            row_list.push(file_value);
+
+            // Drawing the square
             context.fillStyle = crnt_color;
-            context.fillRect(x_position, y_position, sqr_size, sqr_size);
-
-            file = {[String.fromCharCode(65 + x)] : [x_position, y_position]};
-            row.push(file);
+            context.fillRect(x, y, sqr_size, sqr_size);
 
             if (crnt_color == light_sqr_color) {
                 crnt_color = dark_sqr_color;
@@ -74,19 +80,6 @@ function drawBoard (context, sqr_size, dark_sqr_color, light_sqr_color, ctx_widt
 
         }
     }
-
-    // var files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-    // var rows = ['1', '2', '3', '4', '5', '6', '7', '8'];
-
-    // for (index_row in rows) {
-    //     row = rows[index_row];
-    //     board.push({[row]: []});
-
-    //     for (index_file in files) {
-
-    //     }
-    // }
-
 
     return board;
 }
